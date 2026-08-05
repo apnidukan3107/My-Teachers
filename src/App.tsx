@@ -190,15 +190,15 @@ function Login({ users, onLogin }) {
       />
 
       {/* content row: photo stays clear on the left, title + card sit on the right */}
-      <div className="relative min-h-full flex flex-col items-center justify-end md:justify-center md:flex-row md:items-center px-4 py-8 md:px-10 md:gap-8">
+      <div className="relative min-h-full flex flex-col items-center justify-center md:justify-center md:flex-row md:items-center px-4 py-4 md:px-10 md:gap-8">
         <div className="hidden md:block md:flex-1" />
 
         <div className="w-full max-w-[300px] md:w-[300px] md:shrink-0">
-          <div className="text-center mt-fadein mb-5">
+          <div className="text-center mt-fadein mb-3">
             <img
               src={GURU_IMG}
               alt=""
-              className="w-[110px] h-auto mx-auto mb-1"
+              className="w-[80px] h-auto mx-auto mb-1"
               style={{
                 filter: "drop-shadow(0 4px 14px rgba(0,0,0,0.45))",
                 WebkitMaskImage: "radial-gradient(closest-side, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%)",
@@ -206,7 +206,7 @@ function Login({ users, onLogin }) {
               }}
             />
             <h1
-              className="text-[50px] md:text-[58px] font-serif font-bold tracking-tight inline-block"
+              className="text-[38px] md:text-[46px] font-serif font-bold tracking-tight inline-block"
               style={{
                 background: "linear-gradient(180deg, #FCE8B8 0%, #E8B84B 55%, #C98A2E 100%)",
                 WebkitBackgroundClip: "text",
