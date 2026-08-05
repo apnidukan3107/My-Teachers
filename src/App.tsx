@@ -1351,6 +1351,53 @@ function TeacherReport({ leads, batches, attendance }) {
 }
 
 // ---------- Root ----------
+// Firebase setup: data is stored in Cloud Firestore so every user (Admin,
+// Counsellor, Teacher, Volunteer), on any device/browser, sees the same data.
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAapE2RFQ8x2fASjVaJ0jqDQnrfF9HcWRs",
+  authDomain: "my-teachers-ac709.firebaseapp.com",
+  projectId: "my-teachers-ac709",
+  storageBucket: "my-teachers-ac709.firebasestorage.app",
+  messagingSenderId: "457601313083",
+  appId: "1:457601313083:web:20021e3af5f26963686f1e",
+  measurementId: "G-JLNZKGKRSP",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+
+// safeStorage: talks to Firestore. Falls back to localStorage if Firestore
+// is unreachable, so the app never shows a blank page.
+const safeStorage = {
+  async get(key) {
+    try {
+      const snap = await getDoc(doc(db, "myTeachersData", key));
+      if (snap.exists()) return { value: snap.data().value };
+      return null;
+    } catch (e) {
+      try {
+        const raw = localStorage.getItem("mt_" + key);
+        if (raw === null) return null;
+        return { value: raw };
+      } catch (e2) {
+        return null;
+      }
+    }
+  },
+  async set(key, value) {
+    try {
+      await setDoc(doc(db, "myTeachersData", key), { value });
+    } catch (e) {
+      try {
+        localStorage.setItem("mt_" + key, value);
+      } catch (e2) {}
+    }
+  },
+};
+
 export default function App() {
   const [users, setUsers] = useState(seedUsers);
   const [leads, setLeads] = useState([]);
@@ -1373,7 +1420,7 @@ export default function App() {
       ];
       for (const [key, setter] of keys) {
         try {
-          const res = await window.storage.get(key, true);
+          const res = await safeStorage.get(key);
           if (res && res.value) setter(JSON.parse(res.value));
         } catch (e) {
           // key not found yet — keep default
@@ -1386,23 +1433,23 @@ export default function App() {
   // Save data whenever it changes (after initial load)
   React.useEffect(() => {
     if (!loaded) return;
-    window.storage.set("users", JSON.stringify(users), true).catch(() => {});
+    safeStorage.set("users", JSON.stringify(users)).catch(() => {});
   }, [users, loaded]);
   React.useEffect(() => {
     if (!loaded) return;
-    window.storage.set("leads", JSON.stringify(leads), true).catch(() => {});
+    safeStorage.set("leads", JSON.stringify(leads)).catch(() => {});
   }, [leads, loaded]);
   React.useEffect(() => {
     if (!loaded) return;
-    window.storage.set("teacherLeads", JSON.stringify(teacherLeads), true).catch(() => {});
+    safeStorage.set("teacherLeads", JSON.stringify(teacherLeads)).catch(() => {});
   }, [teacherLeads, loaded]);
   React.useEffect(() => {
     if (!loaded) return;
-    window.storage.set("batches", JSON.stringify(batches), true).catch(() => {});
+    safeStorage.set("batches", JSON.stringify(batches)).catch(() => {});
   }, [batches, loaded]);
   React.useEffect(() => {
     if (!loaded) return;
-    window.storage.set("attendance", JSON.stringify(attendance), true).catch(() => {});
+    safeStorage.set("attendance", JSON.stringify(attendance)).catch(() => {});
   }, [attendance, loaded]);
 
   const login = (u) => {
