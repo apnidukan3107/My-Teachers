@@ -186,7 +186,7 @@ function Login({ users, onLogin }) {
       <img
         src={BANNER_IMG}
         alt="Institute"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-bottom"
       />
 
       {/* content row: photo stays clear on the left, title + card sit on the right */}
