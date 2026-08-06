@@ -190,7 +190,7 @@ function Login({ users, onLogin }) {
       />
 
       {/* content row: photo stays clear on the left, title + card sit on the right (mobile AND desktop) */}
-      <div className="relative min-h-full flex flex-col items-center justify-center px-3 py-4 gap-2 md:px-10 md:gap-8">
+      <div className="relative min-h-full flex flex-col items-center justify-end px-3 pt-4 pb-8 gap-2 md:justify-center md:px-10 md:gap-8 md:py-4">
         <div className="w-full max-w-[280px] md:w-[300px] md:max-w-none md:shrink-0">
           <div className="text-center mt-fadein mb-3">
             <img
@@ -198,7 +198,7 @@ function Login({ users, onLogin }) {
               alt=""
               className="mx-auto mb-1"
               style={{
-                width: 108,
+                width: 140,
                 height: "auto",
                 filter: "drop-shadow(0 4px 14px rgba(0,0,0,0.45))",
                 WebkitMaskImage: "radial-gradient(closest-side, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%)",
