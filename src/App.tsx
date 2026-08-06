@@ -182,24 +182,26 @@ function Login({ users, onLogin }) {
     <div className="mt-root h-screen relative overflow-y-auto">
       <FontStyles />
 
-      {/* full-screen photo background — kept fully visible */}
+      {/* full-screen photo background — boy stays visible on the left */}
       <img
         src={BANNER_IMG}
         alt="Institute"
         className="absolute inset-0 w-full h-full object-cover object-left"
       />
 
-      {/* content row: photo stays clear on the left, title + card sit on the right */}
-      <div className="relative min-h-full flex flex-col items-center justify-center md:justify-center md:flex-row md:items-center px-4 py-4 md:px-10 md:gap-8">
-        <div className="hidden md:block md:flex-1" />
+      {/* content row: photo stays clear on the left, title + card sit on the right (mobile AND desktop) */}
+      <div className="relative min-h-full flex flex-row items-end justify-start md:items-center md:justify-center px-3 py-4 gap-2 md:px-10 md:gap-8">
+        <div className="w-[38%] shrink-0 md:flex-1" />
 
-        <div className="w-full max-w-[300px] md:w-[300px] md:shrink-0">
+        <div className="flex-1 max-w-[280px] md:w-[300px] md:max-w-none md:shrink-0">
           <div className="text-center mt-fadein mb-3">
             <img
               src={GURU_IMG}
               alt=""
-              className="w-[80px] h-auto mx-auto mb-1"
+              className="mx-auto mb-1"
               style={{
+                width: 72,
+                height: "auto",
                 filter: "drop-shadow(0 4px 14px rgba(0,0,0,0.45))",
                 WebkitMaskImage: "radial-gradient(closest-side, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%)",
                 maskImage: "radial-gradient(closest-side, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 100%)",
