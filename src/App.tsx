@@ -190,10 +190,8 @@ function Login({ users, onLogin }) {
       />
 
       {/* content row: photo stays clear on the left, title + card sit on the right (mobile AND desktop) */}
-      <div className="relative min-h-full flex flex-row items-end justify-start md:items-center md:justify-center px-3 pt-4 pb-16 gap-2 md:px-10 md:gap-8 md:py-4">
-        <div className="w-[38%] shrink-0 md:flex-1" />
-
-        <div className="flex-1 max-w-[280px] md:w-[300px] md:max-w-none md:shrink-0">
+      <div className="relative min-h-full flex flex-col items-center justify-center px-3 py-4 gap-2 md:px-10 md:gap-8">
+        <div className="w-full max-w-[280px] md:w-[300px] md:max-w-none md:shrink-0">
           <div className="text-center mt-fadein mb-3">
             <img
               src={GURU_IMG}
